@@ -1,20 +1,14 @@
 package com.example.avanza_integration.services;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ServerErrorException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Service
 public class TempService {
+    // TODO: 07/08/2021 move all okHttp to another class
 
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -24,7 +18,7 @@ public class TempService {
      */
     public static String login(){
 
-        return "TEMP: Login";
+        return "TEMP";
     }
 
     /**
@@ -40,12 +34,12 @@ public class TempService {
 
         try(Response response = client.newCall(request).execute()){
 
-            if(!response.isSuccessful()) throw new IOException("Connection ERROR: " + response); //if not successful
+            if(!response.isSuccessful()) throw new IOException("\nConnection ERROR: \n" + response); //if not successful
 
             System.out.println(Objects.requireNonNull(response.body()).string());
 
         } catch (Exception e) {
-            System.out.println("Authentication ERROR: ");
+            System.out.println("\nAuthentication ERROR: \n");
             e.printStackTrace();
             return false;
         }
@@ -58,14 +52,24 @@ public class TempService {
      * @return String with JSON that represents the overview.
      */
     public static String overview() {
-        try {
-            return "TEMP: Overview";
-        } catch (ServerErrorException s) {
-            s.printStackTrace();
-            return "ERROR: Server " + Arrays.toString(s.getStackTrace());
+        Request request = new Request.Builder()
+                .url("https://www.avanza.se/_api/account-overview/overview/categorizedAccounts ") //Avanza Overview
+                .get()
+                .build();
+
+        try(Response response = client.newCall(request).execute()) {
+
+            if(!response.isSuccessful()) {
+                if (response.code() == 401) { //run authenticate before instead of this ?
+                    return "Unauthorised";
+                }
+                throw new IOException("\nConnection ERROR: " + response); //if not successful
+            }
+
+            return Objects.requireNonNull(response.body()).string();
         } catch (Exception e) {
             e.printStackTrace();
-            return "ERROR: Other " + Arrays.toString(e.getStackTrace());
+            return "\nOverview ERROR\n";
         }
     }
 
