@@ -37,6 +37,7 @@ public class TempService {
             e.printStackTrace();
             return "\nBankId Request ERROR: \n";
         }
+        // TODO: 07/08/2021 RETURN  bankid:///?autostarttoken=[TOKEN]
         return temp;
     }
 
