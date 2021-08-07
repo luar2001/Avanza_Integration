@@ -1,16 +1,10 @@
 package com.example.avanza_integration.services;
 
 import com.example.avanza_integration.Connection;
-import okhttp3.*;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.Objects;
 
 @Service
 public class TempService {
-
-    private static final OkHttpClient client = new OkHttpClient();
 
     /**
      * Returns A QRCode For Avanza's BankId Login.
@@ -31,6 +25,7 @@ public class TempService {
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
+        // TODO: 07/08/2021 is it supposed to check both the links? i could not get the other one to return anything..
         String url = "https://www.avanza.se/_cqbe/authentication/session";
 
         String temp = Connection.get(url);
@@ -50,25 +45,14 @@ public class TempService {
      * @return String with JSON that represents the overview.
      */
     public static String overview() {
-        Request request = new Request.Builder()
-                .url("https://www.avanza.se/_api/account-overview/overview/categorizedAccounts ") //Avanza Overview
-                .get()
-                .build();
+        String url = "https://www.avanza.se/_api/account-overview/overview/categorizedAccounts "; //Why does it need blank space at the end?
+        String temp = "You are not loggedin!";
 
-        try(Response response = client.newCall(request).execute()) {
-
-            if(!response.isSuccessful()) {
-                if (response.code() == 401) { //run authenticate before instead of this ?
-                    return "Unauthorised";
-                }
-                throw new IOException("\nConnection ERROR: " + response); //if not successful
-            }
-
-            return Objects.requireNonNull(response.body()).string();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "\nOverview ERROR\n";
+        if (authenticate()){ //checks if the user is loggedin. otherwise, you get HTTP code 401.
+            temp = Connection.get(url);
         }
+
+        return temp;
     }
 
 }
