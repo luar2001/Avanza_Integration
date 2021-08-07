@@ -18,7 +18,7 @@ public class TempService {
      */
     public static String login(){
         String json = "";
-        String temp = "temp";
+        String temp;
         RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json);
 
         assert false;
