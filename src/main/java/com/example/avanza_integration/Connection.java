@@ -1,6 +1,7 @@
 package com.example.avanza_integration;
 
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Connection {
      * @param url GET Http Request url
      * @return String with the response from the url.
      */
+    @NotNull
     public static String get(String url){
         Request request = new Request.Builder()
                 .url(url)
@@ -38,6 +40,7 @@ public class Connection {
      * @param json sends as a response with the request
      * @return SString with the response from the url.
      */
+    @NotNull
     public static String post(String url, String json){
         RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json); // TODO: 07/08/2021 use something that's not deprecated...
 

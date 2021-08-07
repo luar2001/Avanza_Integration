@@ -1,6 +1,7 @@
 package com.example.avanza_integration.services;
 
 import com.example.avanza_integration.Connection;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,7 @@ public class TempService {
      * Returns A QRCode For Avanza's BankId Login.
      * @return String That represents a qrCode
      */
+    @NotNull
     public static String login(){
         String json = "";
         String url = "https://www.avanza.se/_api/authentication/sessions/bankid";
