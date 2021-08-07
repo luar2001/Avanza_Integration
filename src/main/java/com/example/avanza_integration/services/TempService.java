@@ -30,13 +30,7 @@ public class TempService {
 
         String temp = Connection.get(url);
 
-        if(temp.equals("\n Get ERROR \n")){
-            return false;
-        }
-
-        // TODO: 07/08/2021 make it check for "loggedin"=true
-
-        return true;
+        return temp.contains("\"loggedin\"=true");
 
     }
 
