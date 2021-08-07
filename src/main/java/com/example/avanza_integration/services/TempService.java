@@ -1,12 +1,22 @@
 package com.example.avanza_integration.services;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ServerErrorException;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Service
 public class TempService {
+
+    private static final OkHttpClient client = new OkHttpClient();
 
     /**
      * Returns A QRCode For Avanza's BankId Login.
@@ -22,20 +32,25 @@ public class TempService {
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
-        String temp = null;
-        try {
-            temp = "TEMP: authentication";
-        } catch (ServerErrorException s) {
-            System.out.println("ERROR: Server");
-            s.printStackTrace();
-            return false;
+
+        Request request = new Request.Builder()
+                .url("https://www.avanza.se/_cqbe/authentication/session") //Avanza session status for bank id login
+                .get()
+                .build();
+
+        try(Response response = client.newCall(request).execute()){
+
+            if(!response.isSuccessful()) throw new IOException("Connection ERROR: " + response); //if not successful
+
+            System.out.println(Objects.requireNonNull(response.body()).string());
+
         } catch (Exception e) {
-            System.out.println("ERROR: Other");
+            System.out.println("Authentication ERROR: ");
             e.printStackTrace();
             return false;
         }
-
-        return false;
+        // TODO: 07/08/2021 Find in String "loggedin":true or "loggedin":false  | return accordingly
+        return true;
     }
 
     /**
