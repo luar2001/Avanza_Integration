@@ -17,8 +17,27 @@ public class TempService {
      * @return String That represents a qrCode
      */
     public static String login(){
+        String json = "";
+        String temp = "temp";
+        RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json);
 
-        return "TEMP";
+        assert false;
+        Request request = new Request.Builder()
+                .url("https://www.avanza.se/_api/authentication/sessions/bankid") //Avanza session status for bank id login
+                .post(body)
+                .build();
+
+        try(Response response = client.newCall(request).execute()){
+
+            if(!response.isSuccessful()) throw new IOException("\nConnection ERROR: \n" + response); //if not successful
+
+            temp = response.body().string();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "\nBankId Request ERROR: \n";
+        }
+        return temp;
     }
 
     /**
