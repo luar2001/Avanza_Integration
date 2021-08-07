@@ -5,16 +5,16 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.Objects;
 
-class Connection {
+public class Connection {
 
-    private final OkHttpClient client = new OkHttpClient();
+    private static  final OkHttpClient client = new OkHttpClient();
 
     /**
      * HTTP GET Request Using okHttp
      * @param url GET Http Request url
      * @return String with the response from the url.
      */
-    protected String get(String url){
+    public static String get(String url){
         Request request = new Request.Builder()
                 .url(url)
                 .get()
@@ -38,7 +38,7 @@ class Connection {
      * @param json sends as a response with the request
      * @return SString with the response from the url.
      */
-    protected String post(String url, String json){
+    public static String post(String url, String json){
         RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json); // TODO: 07/08/2021 use something that's not deprecated...
 
         assert false;
