@@ -1,5 +1,6 @@
 package com.example.avanza_integration.services;
 
+import com.example.avanza_integration.Connection;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
 
@@ -18,28 +19,12 @@ public class TempService {
      */
     public static String login(){
         String json = "";
-        String temp;
-        RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json);
+        String url = "https://www.avanza.se/_api/authentication/sessions/bankid";
 
-        assert false;
-        Request request = new Request.Builder()
-                .url("https://www.avanza.se/_api/authentication/sessions/bankid") //Avanza session status for bank id login
-                .post(body)
-                .build();
+        String temp = Connection.post(url,json);
 
-        try(Response response = client.newCall(request).execute()){
-
-            if(!response.isSuccessful()) throw new IOException("\nConnection ERROR: \n" + response); //if not successful
-
-            temp = response.body().string();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "\nBankId Request ERROR: \n";
-        }
-        // TODO: 07/08/2021 RETURN  bankid:///?autostarttoken=[TOKEN]
         return temp;
-    }
+     }
 
     /**
      * Checks That you are LoggedIn to Avanza With BankId.
