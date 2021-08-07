@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Service
 public class TempService {
-    // TODO: 07/08/2021 move all okHttp to another class
 
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -23,6 +22,7 @@ public class TempService {
 
         String temp = Connection.post(url,json);
 
+        // TODO: 07/08/2021 Return bankid:///?autostarttoken=[TOKEN]
         return temp;
      }
 
@@ -31,25 +31,18 @@ public class TempService {
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
+        String url = "https://www.avanza.se/_cqbe/authentication/session";
 
-        Request request = new Request.Builder()
-                .url("https://www.avanza.se/_cqbe/authentication/session") //Avanza session status for bank id login
-                .get()
-                .build();
+        String temp = Connection.get(url);
 
-        try(Response response = client.newCall(request).execute()){
-
-            if(!response.isSuccessful()) throw new IOException("\nConnection ERROR: \n" + response); //if not successful
-
-            System.out.println(Objects.requireNonNull(response.body()).string());
-
-        } catch (Exception e) {
-            System.out.println("\nAuthentication ERROR: \n");
-            e.printStackTrace();
+        if(temp.equals("\n Get ERROR \n")){
             return false;
         }
-        // TODO: 07/08/2021 Find in String "loggedin":true or "loggedin":false  | return accordingly
+
+        // TODO: 07/08/2021 make it check for "loggedin"=true
+
         return true;
+
     }
 
     /**
