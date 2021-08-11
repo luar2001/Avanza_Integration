@@ -30,7 +30,7 @@ public class Connection {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "\n Get ERROR \n";
+            return "\nGET ERROR \n";
         }
     }
 
@@ -58,7 +58,7 @@ public class Connection {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "\nBankId Request ERROR: \n";
+            return "\nPOST ERROR: \n";
         }
 
     }
