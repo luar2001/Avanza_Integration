@@ -14,6 +14,8 @@
 	<name>Avanza_Integration</name>
 	<description>Avanza_Integration</description>
 	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>16</java.version>
 	</properties>
 	<dependencies>
