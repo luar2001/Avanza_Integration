@@ -8,19 +8,35 @@ import org.springframework.stereotype.Service;
 public class TempService {
 
     /**
+     * BankId Login Transaction id.
+     */
+    static String transactionId = null;
+
+    /**
+     * BankId Expiration time
+     */
+    static String expiration = null;
+
+
+    /**
      * Returns A QRCode For Avanza's BankId Login.
      * @return String That represents a qrCode
      */
     @NotNull
     public static String login(){
         String url = "https://www.avanza.se/_api/authentication/sessions/bankid";
+        String temp = Connection.post(url,"");
+        String[] split = temp.split("\""); //splits the String at "
 
-        // TODO: 07/08/2021 Return bankid:///?autostarttoken=[TARGET]&redirect=null
-        return Connection.post(url,"");
+        transactionId = split[3];
+
+        expiration = split[7];
+
+        return "bankid:///?autostarttoken=" + split[11] + "&redirect=null";
      }
 
     /**
-     * Checks That you are LoggedIn to Avanza With BankId.
+     * Checks That you are LoggedIn to Avanza With BankId.s
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
