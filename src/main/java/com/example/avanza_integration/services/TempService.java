@@ -27,13 +27,19 @@ public class TempService {
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
-        // TODO: 07/08/2021 is it supposed to check both the links? i could not get the other one to return anything..
         String url = "https://www.avanza.se/_cqbe/authentication/session";
-
         String temp = Connection.get(url);
-
+        System.out.println("TEST2: " + temp); //TEST
         return temp.contains("\"loggedin\"=true");
+    }
 
+    /**
+     * collects info from when user loges in with bankid?
+     */
+    public static void collect(){
+       String url = "https://www.avanza.se/_api/authentication/sessions/bankid/collect";
+       String temp = Connection.get(url); //This being error 400 is standard until login??? (the same on the actual Avanza page at least for me)
+       System.out.println("TEST1: " + temp); //TEST
     }
 
     /**
