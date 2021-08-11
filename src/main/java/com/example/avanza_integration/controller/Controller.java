@@ -24,6 +24,7 @@ public class Controller {
      */
     @GetMapping(path = "/login/bankid/status")
     public boolean authenticate(){
+        TempService.collect();
         return TempService.authenticate();
     }
 
