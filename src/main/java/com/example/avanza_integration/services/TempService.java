@@ -13,13 +13,10 @@ public class TempService {
      */
     @NotNull
     public static String login(){
-        String json = "";
         String url = "https://www.avanza.se/_api/authentication/sessions/bankid";
 
-        String temp = Connection.post(url,json);
-
-        // TODO: 07/08/2021 Return bankid:///?autostarttoken=[TOKEN]
-        return temp;
+        // TODO: 07/08/2021 Return bankid:///?autostarttoken=[TARGET]&redirect=null
+        return Connection.post(url,"");
      }
 
     /**
