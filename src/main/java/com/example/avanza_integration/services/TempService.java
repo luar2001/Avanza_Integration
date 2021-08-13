@@ -85,7 +85,23 @@ public class TempService {
      */
     public static void collect(){
        String url = "https://www.avanza.se/_api/authentication/sessions/bankid/collect";
-       String temp = Connection.get(url); //This being error 400 is standard until login??? (the same on the actual Avanza page at least for me)
+        Headers headers = new Headers.Builder()
+                .add("Accept", "application/json, text/plain, */*")
+                .add("Accept-Language", "en-US,en;q=0.5")
+                .add("Referer", "https://www.avanza.se/start")
+                .add("Content-Type", "application/json;charset=UTF-8")
+                .add("X-SecurityToken", "-")
+                .add("sentry-trace", "afe53d0e6dd844e3b94f65ee1499c50d-b14b7fd231f38a59-0")
+                .add("DNT", "1")
+                .add("Connection", "keep-alive")
+                .add("Cookie", "AZAFTGPERSISTANCE=02b03496e5-da57-48Bhz2X3JiCSUL2qdrP8YmGpCPjxAiolnuI_Yda-FclLZlx7H3ysKEwfHUVL46PAgCFJE; AZAABSESSION=node015tf27r4hl16sbaywujc5nm8h63350.node0; AZAPERSISTANCE=0253c8bd2e-1942-40BTM_7Kja6ZXaRHuQdSv2nJJn1zp8puLDyfo3htFzBiAEtBhcGjdJ1DUGpFw2q135t9I")
+                .add("Sec-Fetch-Dest", "empty")
+                .add("Sec-Fetch-Mode", "cors")
+                .add("Sec-Fetch-Site", "same-origin")
+                .add("Sec-GPC", "1")
+                .build();
+
+       String temp = Connection.get(url,headers); //This being error 400 is standard until login??? (the same on the actual Avanza page at least for me)
        System.out.println("TEST1: " + temp); //TEST
     }
 
