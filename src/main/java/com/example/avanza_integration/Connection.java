@@ -8,7 +8,8 @@ import java.util.Objects;
 
 public class Connection {
 
-    private static  final OkHttpClient client = new OkHttpClient();
+    private static  final OkHttpClient client = new OkHttpClient().newBuilder()
+            .build();
 
     /**
      * HTTP GET Request Using okHttp
