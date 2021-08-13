@@ -45,13 +45,14 @@ public class Connection {
      * @return SString with the response from the url.
      */
     @NotNull
-    public static String post(String url, String json){
-        RequestBody body = RequestBody.create(MediaType.get("application/json; charset=utf-8"),json); // TODO: 07/08/2021 use something that's not deprecated...
+    public static String post(String url, String json, Headers headers){
+        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json);
 
         assert false;
         Request request = new Request.Builder()
                 .url(url)
-                .post(body)
+                .method("POST",body)
+                .headers(headers)
                 .build();
 
         try(Response response = client.newCall(request).execute()){
