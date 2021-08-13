@@ -14,13 +14,16 @@ public class Connection {
     /**
      * HTTP GET Request Using okHttp
      * @param url GET Http Request url
+     * @param headers headers
      * @return String with the response from the url.
      */
     @NotNull
-    public static String get(String url){
+    public static String get(String url, Headers headers){
+
         Request request = new Request.Builder()
                 .url(url)
-                .get()
+                .method("GET", null)
+                .headers(headers)
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
