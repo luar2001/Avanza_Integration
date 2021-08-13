@@ -59,7 +59,23 @@ public class TempService {
      */
     public static boolean authenticate(){
         String url = "https://www.avanza.se/_cqbe/authentication/session";
-        String temp = Connection.get(url);
+        Headers headers = new Headers.Builder()
+                .add("Accept", "application/json, text/plain, */*")
+                .add("Accept-Language", "en-US,en;q=0.5")
+                .add("Referer", "https://www.avanza.se/start")
+                .add("Content-Type", "application/json;charset=UTF-8")
+                .add("X-SecurityToken", "06ae9bee-344c-48b7-8164-a41094ff0ed1")
+                .add("DNT", "1")
+                .add("Connection", "keep-alive")
+                .add("Cookie", "Humany__parameters={\"isLoggedIn\":[\"Ja\"]}; Humany__clientId=d17d3e19-0399-2ee3-4e66-c9f040d4ffcf; AZAFTGPERSISTANCE=02b03496e5-da57-48Bhz2X3JiCSUL2qdrP8YmGpCPjxAiolnuI_Yda-FclLZlx7H3ysKEwfHUVL46PAgCFJE; AZAABSESSION=node015tf27r4hl16sbaywujc5nm8h63350.node0; AZAPERSISTANCE=0253c8bd2e-1942-4088f2YvXIspRq-ni-c3MNBe09qrK-uPlSFu4Q-XJoz9uXxQSyqA4WnpsPmlVJD3-N7Uk; csid=813525c3-6df4-4462-b002-0aaf849dda70; AZAPERSISTANCE=0253c8bd2e-1942-40vL7vCRvmzcl_y2Xrzn1XSzDgBPWf9XAccbORCSj13euBJvjpQO9T9Edj20LizNBonrc")
+                .add("Sec-Fetch-Dest", "empty")
+                .add("Sec-Fetch-Mode", "cors")
+                .add("Sec-Fetch-Site", "same-origin")
+                .add("Sec-GPC", "1")
+                .add("Pragma", "no-cache")
+                .add("Cache-Control", "no-cache")
+                .build();
+        String temp = Connection.get(url, headers);
         System.out.println("TEST2: " + temp); //TEST
         return temp.contains("\"loggedin\"=true");
     }
