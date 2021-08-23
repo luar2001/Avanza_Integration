@@ -96,11 +96,9 @@ public class TempService {
         String url = "https://www.avanza.se/_api/authentication/sessions/bankid/collect/" + customerId;
         Headers headers = new Headers.Builder()
                 .add("Connection", "keep-alive")
-                .add("sec-ch-ua", "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"")
                 .add("Accept", "application/json, text/plain, */*")
                 .add("X-SecurityToken", "-")
                 .add("sec-ch-ua-mobile", "?0")
-                .add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36")
                 .add("Content-Type", "application/json;charset=UTF-8")
                 .add("Sec-Fetch-Site", "same-origin")
                 .add("Sec-Fetch-Mode", "cors")
@@ -129,11 +127,9 @@ public class TempService {
         String temp = "You are not loggedin!";
         Headers headers = new Headers.Builder()
                 .add("Connection", "keep-alive")
-                .add("sec-ch-ua", "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"")
                 .add("Accept", "application/json, text/plain, */*")
                 .add("X-SecurityToken", "36e6de0f-49a2-4335-87e3-ab5df2c74421")
                 .add("sec-ch-ua-mobile", "?0")
-                .add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36")
                 .add("Content-Type", "application/json;charset=UTF-8")
                 .add("Sec-Fetch-Site", "same-origin")
                 .add("Sec-Fetch-Mode", "cors")
