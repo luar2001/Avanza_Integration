@@ -58,7 +58,7 @@ public class TempService {
     /**
      * collects info from when user loges in with bankid?
      */
-    public static void collect(){
+    public static boolean collect(){
        String url = "https://www.avanza.se/_api/authentication/sessions/bankid/collect";
         Headers headers = new Headers.Builder()
                 .add("Connection", "keep-alive")
@@ -76,7 +76,14 @@ public class TempService {
        String temp = Connection.get(url,headers); //This being error 400 is standard until login??? (the same on the actual Avanza page at least for me)
 
         String[] split = temp.split("\""); //splits the String at "
-        customerId = split[9];
+
+        if(split.length > 9){
+            customerId = split[9];
+            return true;
+        } else{
+            return false;
+        }
+
     }
 
     /**
