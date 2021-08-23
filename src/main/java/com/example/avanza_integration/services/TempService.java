@@ -91,6 +91,8 @@ public class TempService {
      * @return Boolean: True = LoggedIn | False = Not LoggedIn
      */
     public static boolean authenticate(){
+
+        if(collect()){
         String url = "https://www.avanza.se/_api/authentication/sessions/bankid/collect/" + customerId;
         Headers headers = new Headers.Builder()
                 .add("Connection", "keep-alive")
@@ -106,12 +108,16 @@ public class TempService {
                 .add("Referer", "https://www.avanza.se/start")
                 .add("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8")
                 .add("Cookie", "AZABANKIDTRANSID="+transactionId+"; AZAPERSISTANCE=0253c8bd2e-1942-40-99f2Gks-d8CR1raguhnrtOeCOLkKQ8QPxmtcuPQ6QVL13skB2l_nrhePXgutS0sCCk; AZACOOKIECONSENT_UX=YES; AZACOOKIECONSENT_ANALYSIS=YES; AZACOOKIECONSENT_MARKETING=YES; _gcl_au=1.1.402549023.1629190458; _ga=GA1.2.1657350706.1629190458; _gid=GA1.2.889662377.1629190458; AZAHLI=bankId; Humany__parameters={\"isLoggedIn\":[\"Ja\"]}; Humany__clientId=3555c263-388a-664d-5ef2-8891cffe4a37; _gat_UA-1234489-15=1; csid=d0895541-f941-4e34-9814-77172eecf80a").build();
-        String temp = Connection.get(url, headers);
+           String temp = Connection.get(url, headers);
 
-        String[] split = temp.split("\""); //splits the String at "
-        authenticationSession = split[3];
+           String[] split = temp.split("\""); //splits the String at "
+           authenticationSession = split[3];
 
-        return temp.contains("\"registrationComplete\":true");
+           return temp.contains("\"registrationComplete\":true");
+       }else{
+           return false;
+       }
+
     }
 
     /**
