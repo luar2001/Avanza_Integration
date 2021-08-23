@@ -112,28 +112,26 @@ public class TempService {
      * @return String with JSON that represents the overview.
      */
     public static String overview() {
-        String url = "https://www.avanza.se/_api/account-overview/overview/categorizedAccounts "; //Why does it need blank space at the end?
+        String url = "https://www.avanza.se/_api/account-overview/overview/categorizedAccounts";
         String temp = "You are not loggedin!";
         Headers headers = new Headers.Builder()
-                .add("Accept", "application/json, text/plain, */*")
-                .add("Accept-Language", "en-US,en;q=0.5")
-                .add("Referer", "https://www.avanza.se/start")
-                .add("Content-Type", "application/json;charset=UTF-8")
-                .add("X-SecurityToken", "-")
-                .add("sentry-trace", "afe53d0e6dd844e3b94f65ee1499c50d-b14b7fd231f38a59-0")
-                .add("DNT", "1")
                 .add("Connection", "keep-alive")
-                .add("Cookie", "AZAFTGPERSISTANCE=02b03496e5-da57-48Bhz2X3JiCSUL2qdrP8YmGpCPjxAiolnuI_Yda-FclLZlx7H3ysKEwfHUVL46PAgCFJE; AZAABSESSION=node015tf27r4hl16sbaywujc5nm8h63350.node0; AZAPERSISTANCE=0253c8bd2e-1942-40BTM_7Kja6ZXaRHuQdSv2nJJn1zp8puLDyfo3htFzBiAEtBhcGjdJ1DUGpFw2q135t9I; AZABANKIDTRANSID=3dca27ac-c814-43bf-918f-c72d388e53b8; AZAPERSISTANCE=0253c8bd2e-1942-40rHS41_hTldPJQVocDYwtk-0rXkHsfcdXGrBTr_Jpt3R4NTUeY7A-bxNQ20d0IDPakA0")
-                .add("Sec-Fetch-Dest", "empty")
-                .add("Sec-Fetch-Mode", "cors")
+                .add("sec-ch-ua", "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"")
+                .add("Accept", "application/json, text/plain, */*")
+                .add("X-SecurityToken", "36e6de0f-49a2-4335-87e3-ab5df2c74421")
+                .add("sec-ch-ua-mobile", "?0")
+                .add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36")
+                .add("Content-Type", "application/json;charset=UTF-8")
                 .add("Sec-Fetch-Site", "same-origin")
-                .add("Sec-GPC", "1")
+                .add("Sec-Fetch-Mode", "cors")
+                .add("Sec-Fetch-Dest", "empty")
+                .add("Referer", "https://www.avanza.se/min-ekonomi/oversikt.html")
+                .add("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8")
+                .add("Cookie", "AZAPERSISTANCE=0253c8bd2e-1942-40-99f2Gks-d8CR1raguhnrtOeCOLkKQ8QPxmtcuPQ6QVL13skB2l_nrhePXgutS0sCCk; AZACOOKIECONSENT_UX=YES; AZACOOKIECONSENT_ANALYSIS=YES; AZACOOKIECONSENT_MARKETING=YES; _gcl_au=1.1.402549023.1629190458; _ga=GA1.2.1657350706.1629190458; _gid=GA1.2.889662377.1629190458; AZAHLI=bankId; Humany__parameters={\"isLoggedIn\":[\"Ja\"]}; Humany__clientId=3555c263-388a-664d-5ef2-8891cffe4a37; _gat_UA-1234489-15=1; csid="+authenticationSession+"; AZAMENUTAB=/min-ekonomi/oversikt.html||")
                 .build();
-
-        if (authenticate()){ //checks if the user is loggedin. otherwise, you get HTTP code 401.
-            temp = Connection.get(url,headers);
-        }
-
+            if(authenticate()){
+                temp = Connection.get(url,headers);
+            }
         return temp;
     }
 
