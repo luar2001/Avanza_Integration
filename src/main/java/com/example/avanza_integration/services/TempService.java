@@ -18,6 +18,10 @@ public class TempService {
      */
     static String expiration = null;
 
+    /**
+     * Session authentication code
+     */
+    private static String authenticationSession = " ";
 
     /**
      * Returns A QRCode For Avanza's BankId Login.
