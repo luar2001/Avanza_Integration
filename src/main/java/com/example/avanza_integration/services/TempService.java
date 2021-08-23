@@ -48,11 +48,9 @@ public class TempService {
                 .build();
 
         String temp = Connection.post(url,"{}",headers);
+
         String[] split = temp.split("\""); //splits the String at "
-
         transactionId = split[3];
-
-        expiration = split[7];
 
         return "bankid:///?autostarttoken=" + split[11] + "&redirect=null";
      }
