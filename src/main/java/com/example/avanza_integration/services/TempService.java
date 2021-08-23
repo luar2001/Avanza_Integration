@@ -14,9 +14,9 @@ public class TempService {
     private static String transactionId = " ";
 
     /**
-     * BankId Expiration time
+     * Customer identification code
      */
-    static String expiration = null;
+    private static String customerId = " ";
 
     /**
      * Session authentication code
